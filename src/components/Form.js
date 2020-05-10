@@ -1,12 +1,6 @@
 import React, { useState } from "react";
 
-const Form = () => {
-  // State in the form
-  const [search, setSearch] = useState({
-    city: "",
-    country: "",
-  });
-
+const Form = ({ search, setSearch, setConsult }) => {
   const [error, setError] = useState(false);
 
   // Extracting the city and the country
@@ -34,13 +28,11 @@ const Form = () => {
     setError(false);
 
     // Send it to app.js
+    setConsult(true);
   };
 
   return (
     <form onSubmit={handleSubmit}>
-      {error ? (
-        <p className="red darken-4 error">All field are required</p>
-      ) : null}
       <div className="input-field col s12">
         <input
           type="text"
@@ -48,8 +40,18 @@ const Form = () => {
           id="city"
           value={city}
           onChange={handleChange}
+          className="validate"
         />
         <label htmlFor="city">City: </label>
+        {error ? (
+          <span
+            className="helper-text "
+            data-error="Wrong "
+            data-success="Right"
+          >
+            <i className="tiny material-icons">error</i> This field is required
+          </span>
+        ) : null}
       </div>
 
       <div className="input-field col s12">
@@ -59,7 +61,9 @@ const Form = () => {
           value={country}
           onChange={handleChange}
         >
-          <option value="">Select a country</option>
+          <option value="" disabled>
+            Select a country
+          </option>
           <option value="AR">Argentina</option>
           <option value="CO">Colombia</option>
           <option value="CR">Costa Rica</option>
