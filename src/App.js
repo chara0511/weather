@@ -1,6 +1,7 @@
 import React, { Fragment, useState, useEffect } from "react";
 import Header from "./components/Header";
 import Form from "./components/Form";
+import Weather from "./components/Weather";
 
 function App() {
   // State in the main component
@@ -50,7 +51,9 @@ function App() {
                 setConsult={setConsult}
               />
             </div>
-            <div className="col m6 s12">2</div>
+            <div className="col m6 s12">
+              <Weather result={result} />
+            </div>
           </div>
         </div>
       </div>
