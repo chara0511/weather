@@ -2,6 +2,7 @@ import React, { Fragment, useState, useEffect } from "react";
 import Header from "./components/Header";
 import Form from "./components/Form";
 import Weather from "./components/Weather";
+import Error from "./components/Error";
 
 function App() {
   // State in the main component
@@ -14,8 +15,10 @@ function App() {
   const [consult, setConsult] = useState(false);
 
   // State result
-
   const [result, setResult] = useState({});
+
+  // State error
+  const [error, setError] = useState(false);
 
   const { city, country } = search;
 
@@ -33,10 +36,27 @@ function App() {
         console.log(result);
 
         setResult(result);
+
+        setConsult(false);
+
+        // Error
+        if (result.cod === "404") {
+          setError(true);
+        } else {
+          setError(false);
+        }
       }
     };
     consultAPI();
   }, [consult]);
+
+  let wildcard;
+
+  if (error) {
+    wildcard = <Error message=" City not found" />;
+  } else {
+    wildcard = <Weather result={result} />;
+  }
 
   return (
     <Fragment>
@@ -51,9 +71,7 @@ function App() {
                 setConsult={setConsult}
               />
             </div>
-            <div className="col m6 s12">
-              <Weather result={result} />
-            </div>
+            <div className="col m6 s12">{wildcard}</div>
           </div>
         </div>
       </div>
