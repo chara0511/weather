@@ -48,7 +48,7 @@ function App() {
       }
     };
     consultAPI();
-  }, [consult]);
+  }, [city, consult, country]);
 
   let wildcard;
 

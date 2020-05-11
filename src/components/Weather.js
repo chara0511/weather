@@ -1,13 +1,14 @@
 import React from "react";
+import CountUp from "react-countup";
 
 const Weather = ({ result }) => {
   // Extracting the values
-  const { name, main, sys } = result;
+  const { coord, name, main, sys } = result;
 
-  // undefined temp
+  // Undefined temp
   if (!name) return null;
 
-  //convert ºC
+  // Convert to ºC
   const kelvin = 273.15;
 
   return (
@@ -16,9 +17,17 @@ const Weather = ({ result }) => {
         <h2>
           {name}, {sys.country}
         </h2>
-        <p className="temperature">
-          {parseFloat(main.temp - kelvin, 10).toFixed(2)}
+        <p>
+          <CountUp
+            className="temperature"
+            start={0}
+            end={main.temp - kelvin}
+            duration={2.5}
+          />
           <span>&#x2103;</span>
+        </p>
+        <p>
+          Lat: {coord.lat} Long: {coord.lon}
         </p>
         <p>
           Max: {parseFloat(main.temp_max - kelvin, 10).toFixed(2)}

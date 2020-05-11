@@ -25,6 +25,7 @@ const Form = ({ search, setSearch, setConsult }) => {
       return;
     }
 
+    // If validate is false change the state
     setError(false);
 
     // Send it to app.js
@@ -44,11 +45,7 @@ const Form = ({ search, setSearch, setConsult }) => {
         />
         <label htmlFor="city">City: </label>
         {error ? (
-          <span
-            className="helper-text "
-            data-error="Wrong "
-            data-success="Right"
-          >
+          <span className="helper-text" data-success="Right" data-error="Wrong">
             <i className="tiny material-icons">error</i> This field is required
           </span>
         ) : null}
