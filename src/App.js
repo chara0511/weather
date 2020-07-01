@@ -25,7 +25,7 @@ function App() {
   useEffect(() => {
     const consultAPI = async () => {
       if (consult) {
-        const appId = "0c0b7d1bcc3e964ca6ef54c3aa586a5d";
+        const appId = "your appId";
 
         const url = `http://api.openweathermap.org/data/2.5/weather?q=${city},${country}&appid=${appId}`;
 
